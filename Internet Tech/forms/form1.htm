@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<style>
+   .myDiv{
+     margin: auto;
+     width: 40%;
+     padding: 10px;
+         }
+   .myDiv2{
+     margin: auto;
+     width: 15%;
+     padding: 10px;
+         }
+</style>
+   <head>
+   </head>
+	
+   <body>
+      <h1 style="text-align:center;">Fill in Form</h1>
+      <hr style="width: 50%; height: 2px; color:green; background-color: green;">
+      <div class="myDiv">
+      <form >
+         First name: <input type = "text" name = "first_name" />
+         Last name: <input type = "text" name = "last_name" /> <br><br>
+         <b>Your age:</b>
+         <br>
+         <input type = "radio" name = "subject" value = "10"> Up to 10 years
+         <input type = "radio" name = "subject" value = "10_15"> 10-15
+         <br>
+         <input type = "radio" name = "subject" value = "16_20"> 16-20
+         <input type = "radio" name = "subject" value = "21_30"> 21-30
+         <br>
+         <input type = "radio" name = "subject" value = "31_40"> 31-40
+         <input type = "radio" name = "subject" value = "41_50"> 41-50
+         <br>
+         <input type = "radio" name = "subject" value = "51_60"> 51-60
+         <input type = "radio" name = "subject" value = "60"> Over 60 <br><br>
+         <b>Your address:</b>
+         <br>
+         City/district: <select name = "dropdown">
+            <option value = "Istanbul" selected>Istanbul</option>
+            <option value = "Kocaeli">Kocaeli</option>
+            <option value = "Izmir" selected>Izmir</option>
+            <option value = "Ankara">Ankara</option>
+         </select> <br>
+         Street, house, apartment: <br> 
+         <textarea rows = "5" cols = "50" name = "address">
+         </textarea> <br>
+         E-mail address: <input type = "text" name = "email_address" /> <br><br>
+         <b>Your interests:</b><br>
+         <input type = "checkbox" name = "computers" value = "on"> Computers
+         <input type = "checkbox" name = "reading" value = "on"> Reading
+         <input type = "checkbox" name = "history" value = "on"> History
+         <input type = "checkbox" name = "art" value = "on"> Art
+         <input type = "checkbox" name = "movies" value = "on"> Movies
+         <input type = "checkbox" name = "other" value = "on"> Other
+      </form>
+      </div>
+      <hr style="width: 50%; height: 2px; color:green; background-color: green;">
+      <div class="myDiv2">
+         <form>
+         <input type = "reset" name = "reset" value = "Reset"/>
+         <input type = "submit" name = "submit"  value = "Submit Querry"/>
+      </form>
+      </div>
+   </body>
+	
+</html>

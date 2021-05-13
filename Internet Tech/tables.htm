@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<style>
+ table.a{
+  width:100%;
+ }
+ table.b{
+  width:70%;
+  margin-left: auto;
+  margin-right:auto;
+  background-color:#999999;
+ }
+ div{
+  border:5px outset;
+  border-color: #b3b3b3;
+ }
+ th,td,caption{
+  border:2px solid black;
+ }
+</style>
+<body>
+
+<h1 style="color:blue; text-align:center;">The first table. The width of the table is full screen.</h1>
+<div>
+<table class="a">
+  <caption style="color:blue; background-color:#8585ad;">Name of the table.</caption>
+  <tr>
+    <th>The first column</th>
+    <th>The second column</th>
+    <th>The third column</th>
+    <th>The fourth column</th>
+  </tr>
+  <tr>
+    <td style="text-align:center;">The text is centered and aligned to the middle of the cell vertically</td>
+    <td height="80" width="50%" style="vertical-align:text-top;">The height of the cell is 80pt and width is 50%. The text aligned to the top of the table cell.</td>
+    <td colspan="2">This table cell merge two columns. The text aligned to the bottom of the table cell.</td>
+  </tr>
+    <td colspan="2" height="60" style="vertical-align:middle; text-align:right;"><em>Height of the cell is 60pt. The text is aligned to the right horizantally and middle of the cell.</em></td>
+    <td style="color:blue; text-align:center;"><del>The text is centered. Strikes a line through the text.</del></td>
+    <td style="vertical-align:text-top;">The text aligned to the top of the table cell.</td>
+  </tr>
+  </tr>
+    <td colspan="4" style="text-align:center; background-color:#8585ad; color:white;">The last cell of the table.</td>
+  </tr>
+</table>
+</div>
+<h2 style="color:blue; text-align:center;">The second table. The widht of the table is 70%</h1>
+<table class="b">
+  <tr>
+    <th style="background-color:#00b300; color:white;">The first column of the first line</th>
+    <th style="background-color:#00b300; color:white;" width="200px">The second column of the first line</th>
+    <th style="background-color:#00b300; color:white;" width="220px">The third column of the first line</th>
+  </tr>
+  <tr>
+    <td style="text-align:center; font-size:50%; vertical-align: text-bottom;">The text is centered and aligned to the bottom of the table cell. The font size of the text is 1.</td>
+    <td style="color:purple; text-align:center;"rowspan="2">The width of the column is 200pt. The text is centered and merge two lines of the table.</td>
+    <td>The width of the column is 220pt.
+      <ul style="list-style-type:circle;">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+        </ul>
+    </td>
+  </tr>
+  <tr>
+    <td style="text-align:center;">The text is centered and aligned to the middle of the cell.</td>
+    <td style="text-align:right;">The text is aligned to the right of the cell.</td>
+  </tr>
+</table>
+
+</body>
+</html>

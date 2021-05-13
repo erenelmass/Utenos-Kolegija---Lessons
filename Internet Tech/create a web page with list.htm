@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<body>
+<style>
+div{
+   height: 500px;
+   width: 30%;
+   border: 1px solid black;
+}
+ul.a{
+   list-style-type: circle;
+}
+ul.b{
+   list-style-type: square;
+}
+ol.c{
+   list-style-type: upper-roman;
+}
+ol.d{
+   list-style-type: lower-alpha;
+}
+</style>
+
+<div>
+<h1 style="margin-left: 180px;">List</h1>
+<ol style="color:red;">
+   <li>The first item of the ordered list.</li>
+   <li>The second item of the ordered list.
+      <ol class="d" style="color:blue;">
+         <li>The first item of the ordered list in the list.</li>
+         <li>The second item of the ordered list in the list.</li>
+         <li>The third item of the ordered list in the list.</li>
+      </ol>
+   </li>
+   <li>The third item of the ordered list.</li>
+</ol>
+<ul style="color:cyan;">
+   <li>The first item of the unordered list.</li>
+      <ol class="c" style="color:fuchsia;">
+         <li>The first item of the ordered list in the unordered list.</li>
+         <li>The second item of the ordered list in the unordered list.</li>
+         <li>The third item of the ordered list in the unordered list.</li>
+         <li>The fourth item of the ordered list in the unordered list.</li>
+      </ol>
+   <li>The second item of the unordered list.</li>
+      <ul class="b" style="color:orange;">
+         <li>The first item of the unordered list in the unordered list.</li>
+            <ul class="a" style="color:olive;">
+               <li>The first item of</li>
+               <li>The second item of</li>
+            </ul>
+         <li>The second item of the unordered list in the unordered list.</li>
+      </ul>
+   <li>The third item of the unordered list.</li>
+</ul>
+</div>
+</body>
+</html>

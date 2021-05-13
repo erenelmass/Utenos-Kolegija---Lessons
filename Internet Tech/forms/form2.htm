@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<style>
+ div{
+     margin: auto;
+     width: 20%;
+     padding: 10px;
+    }
+</style>
+   <body>
+      <h1 style="text-align:center;">Please fill in the form</h1>
+      <hr style="height: 3px; color: blue; background-color: blue; width: 50%;"></hr>
+      <div>
+         <form >
+            Your name and surname: <input type = "text" name = "name_surname" /> <br><br>
+            Address:
+         <textarea rows = "5" cols = "50" name = "description">
+            Enter address here...
+         </textarea> <br><br>
+            E-mail address: <input type = "text" name = "email_address" /> <br><br>
+            Occupation <br>
+         <input type = "checkbox" name = "student" value = "on"> You are a student <br>
+         <input type = "checkbox" name = "worker" value = "on"> You are a worker <br>
+         <input type = "checkbox" name = "employee" value = "on"> You are a employee <br>
+         <input type = "checkbox" name = "unemployeed" value = "on"> You are a unemployeed 
+         </form>
+      </div>
+      <hr style="height: 3px; color: blue; background-color: blue; width: 50%;"></hr>
+      <h2 style="text-align:center;">Site evaluation</h2>
+      <div>
+         <form> 
+         Your comments:
+         <textarea rows = "5" cols = "50" name = "description">
+            Enter comment here...
+         </textarea>
+         How do you rate my site? <select name = "dropdown">
+            <option value = "satisfied" selected>Very satisfied</option>
+            <option value = "liked">Liked it</option>
+            <option value = "didnt_liked" selected>Didn't liked it</option>
+            <option value = "hated">Hated it</option>
+         </select>
+      </form>
+      </div>
+      <hr style="height: 3px; color: blue; background-color: blue; width: 50%;"></hr>
+      <div>
+         <form>
+         <input type = "submit" name = "submit" value = "Submit" />
+         <input type = "reset" name = "reset"  value = "Reset"/>
+      </form>
+      </div>
+   </body>
+	
+</html>
