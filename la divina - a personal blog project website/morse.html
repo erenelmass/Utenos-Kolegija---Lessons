@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Morse Code Sounder</title>
+
+<meta name="description" content="Morse code translation sounder ITU Internation American Morse Code Railroad Morse download">
+
+<style>
+p{
+    text-align: left; 
+    color: #eeebdd; 
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 15px; 
+    margin-top: 50px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+a:link {
+  color: #eeebdd;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:visited {
+  color: #eeebdd;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:hover {
+  color: #eeebdd;
+  background-color: transparent;
+  text-decoration: none;
+}
+a:active {
+  color: #eeebdd;
+  background-color: transparent;
+  text-decoration: none;
+}
+
+footer{
+    color: #810000;
+    display: block;
+}
+
+html {
+	background: #1b1717;
+	font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+	padding: 24px;
+	max-width: 960px;
+	background: #1b1717;
+	font-size: 15px;
+    margin-left: 190px;
+    margin-right: 190px;
+}
+
+h1 {
+	font-size: 26px;
+	margin-top: -4px;
+}
+
+.rubrik {
+	line-height: 140%;
+}
+
+.rubrikbot {
+	line-height: 140%;
+	margin-top: 32px;
+}
+
+fieldset {
+	margin-top: 20px;
+	padding: 14px;
+	background-color: #1b1717;
+	white-space: nowrap;
+    border: #1b1717;
+    margin-right: 280px;
+    margin-left: 280px;
+}
+
+
+textarea#astringout, textarea#mstringout {
+	background-color: #eeebdd;
+}
+
+fieldset button {
+	margin-top: 6px;
+	margin-bottom: 6px;
+    color: #1b1717; 
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 15px;
+    background-color: #eeebdd;
+    border: #eeebdd;
+}
+
+fieldset textarea {
+	width: 400px;
+	font-size: 15px;	
+}
+
+#nosuppac, #nosuppoac {
+	display: none;
+	font-size: 14px;
+	color: red;
+	margin-top: 0px;
+	margin-bottom: 0px;
+	white-space: normal;
+}
+
+#AMCnote {
+	font-size: 14px;
+	margin-top: 4px;
+	margin-bottom: 0px;
+	white-space: normal;
+}
+
+label.radio {
+	margin-right: 12px;
+    color: #eeebdd; 
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 15px;
+}
+
+label.slider * {
+	vertical-align: middle;
+    color: #eeebdd; 
+    font-family: 'Courier New', Courier, monospace; 
+    font-size: 15px;
+
+}
+
+label.slider input {
+	width: 270px;
+}
+
+span.sliderrange {
+	font-size: 13px;
+	margin-left: 2px;
+	margin-right: 2px;
+}
+
+span.inplab {
+	margin-left: 20px;
+}
+
+
+@media screen and (max-width: 510px) {
+	
+	body {
+		padding: 10px 6px;
+	}
+	
+	fieldset {
+		max-width: 100%;
+	}
+	
+	fieldset textarea {
+		width: 100%;
+	}
+	
+	label.slider input {
+		width: 200px;
+	}
+	
+}
+
+@media screen and (max-width: 400px) {
+	
+	label.slider input {
+		width: 120px;
+	}
+	
+}
+
+</style>
+
+<script src="defmorse.js"></script>
+
+<script src="audioBufferToWav.js"></script>	<!-- See https://github.com/Jam3/audiobuffer-to-wav -->
+
+<script>
+
+
+function doaudtest() {
+	
+	var sounditq=window.AudioContext || window.webkitAudioContext;
+	var downloaditq=window.OfflineAudioContext || window.webkitOfflineAudioContext;
+	
+	try { var testoac=new downloaditq(1, 80, 8000); testoac=null; }	// This is to get (some/all?) Safaris which don't support the sample rate. They won't download the blob in any case... so turn download off.
+	catch (error) { downloaditq=null; }
+	
+	if (typeof sounditq=="undefined") {
+		audac=false;
+		var nosuppacDOM=document.getElementById("nosuppac");
+		nosuppacDOM.style.display="block";
+		var butplayDOM=document.getElementById("butplay");
+		butplayDOM.setAttribute("disabled", "");
+	} else {
+		audac=true;		
+	}
+
+	if (downloaditq==null || typeof downloaditq=="undefined") {
+		audoac=false;
+		var nosuppoacDOM=document.getElementById("nosuppoac");
+		nosuppoacDOM.style.display="block";
+		var butdownloadDOM=document.getElementById("butdownload");
+		butdownloadDOM.setAttribute("disabled", "");
+	} else {
+		audoac=true;
+	}	
+
+
+}
+
+
+
+
+function domorse(action) {
+
+	var astringinpDOM=document.getElementById("astringinp");
+	
+	var astring=astringinpDOM.value;
+
+
+	astring=astring.trim().toUpperCase();
+	astring=astring.replace(/\s+/g, " ");
+	if (morsetype=="ITU") astring=astring.replace(/[^A-Z0-9 .,?'!/()&:;=+-_"$@<>ÀÄÅĄÆĆĈÇĐÐÉÈĘĜĤĴŁŃÑÓÖØŚŜŠÞÜŬŹŻ]/g, "");
+	if (morsetype=="AMC") astring=astring.replace(/[^A-Z0-9 .,?!&<>]/g, "");
+	astring=astring.replace(/\s+/g, " ");
+	
+
+	var astringoutDOM=document.getElementById("astringout");
+	
+	astringoutDOM.value=astring;
+
+
+
+	var mstring="";
+	
+	var inprosign=false;
+	
+	for (var i=0; i<astring.length; i++) {
+	
+		var charinq=astring.charAt(i);
+	
+		if (charinq=="<") inprosign=true;
+		else if (charinq==">") inprosign=false;
+
+		if (morsetype=="ITU") mstring=mstring+morselu.itu[charinq];
+		if (morsetype=="AMC") mstring=mstring+morselu.amc[charinq];
+
+		if (inprosign==false) mstring=mstring+" ";
+
+	}
+	
+	
+	mstring=mstring.replace(/ \/ /g, "/").replace(/\<|\>/g, "").trim();
+
+
+	var zerostr="00000000000000000000000000000000000000000000000000000000000000000000000000000000";
+	zerostr=zerostr+zerostr;
+	var caddgapstr=zerostr.substr(0, Math.round(spaceexpand*3)-1);	// The -1 is because there is one dot-length gap in the beatstrings for dots and dashes already.
+	var waddgapstr=zerostr.substr(0, Math.round(spaceexpand*wordspace)-1);
+	
+	
+	var beatstring="";
+	
+	for (var j=0; j<mstring.length; j++) {
+	
+		var morseinq=mstring.charAt(j);
+		
+		if (morseinq==".") beatstring=beatstring+"10";
+		else if (morseinq=="-" && morsetype=="ITU") beatstring=beatstring+"1110";
+		else if (morseinq=="-" && morsetype=="AMC") beatstring=beatstring+"110";
+		else if (morseinq=="=" && morsetype=="AMC") beatstring=beatstring+"11110";
+		else if (morseinq=="≡" && morsetype=="AMC") beatstring=beatstring+"1111110";
+		else if (morseinq=="Δ" && morsetype=="AMC") beatstring=beatstring+"0";
+		else if (morseinq==" ") beatstring=beatstring+caddgapstr;
+		else if (morseinq=="/") beatstring=beatstring+waddgapstr;
+		
+	}
+
+
+	beatstring=beatstring.replace(/0*?$/, "");	// Strip any trailing 0/quiets.
+	
+
+	var mstringoutDOM=document.getElementById("mstringout");
+	
+	mstringoutDOM.value=mstring;
+
+
+
+	if (lastcontonoroff=="on" && typeof audcon!="undefined") {
+//		console.log("Trying to close existing audio context");
+		audcon.close();
+	}
+	
+	var startdelay=0.5;	// Otherwise might clip first pulse.
+
+	if (action=="download") {
+		var OfflineAudioContext=window.OfflineAudioContext || window.webkitOfflineAudioContext;
+		audcon=new OfflineAudioContext(1, 8000*(startdelay+beatstring.length*dotms/1000), 8000);	// 8000Hz is the min allowed by the spec. Morse is not hi-fi and we want to keep the size down. Safari (iOS? all?) won't do <44.1kHz but is already disabled.
+		lastcontonoroff="off";
+	} else if (action=="play") {
+		var AudioContext=window.AudioContext || window.webkitAudioContext;
+		audcon=new AudioContext;
+		lastcontonoroff="on";
+	}
+
+	if (action!="convert") {
+	
+		var oscillator=audcon.createOscillator();
+		var nodegain=audcon.createGain();
+		
+		oscillator.connect(nodegain);
+		nodegain.connect(audcon.destination);
+		
+		oscillator.type="sine";
+		oscillator.frequency.setValueAtTime(freq, 0);
+	
+		var oldstate=0;
+	
+		for (var k=0; k<beatstring.length; k++) {
+			
+			var thisstate=beatstring.charAt(k);	
+			
+			if (oldstate!=thisstate) {
+		
+//				console.log("Change of state to "+thisstate);
+				nodegain.gain.setValueAtTime(thisstate, startdelay+k*dotms/1000);
+				oldstate=beatstring.charAt(k);
+		
+			}
+	
+		}
+		
+		oscillator.start(startdelay);
+		oscillator.stop(startdelay+beatstring.length*dotms/1000);
+			
+		if (action=="download") {
+		
+			audcon.oncomplete=function(e) { downl(e.renderedBuffer); }
+			audcon.startRendering();
+		
+		}
+	
+	}
+
+
+}
+
+
+
+
+function downl(buff) {
+
+	var wav=audioBufferToWav(buff);
+
+	var blob=new window.Blob( [ new DataView(wav) ], {type: 'audio/wav'} );
+
+	var url=window.URL.createObjectURL(blob);
+
+	var foDOM=document.getElementById("fileout");
+	
+	foDOM.setAttribute("href", url);
+	
+	foDOM.click();	// Fake a click on the <a>.
+
+	setTimeout(function() { window.URL.revokeObjectURL(url) }, 30000);	// After a while, release the online file blob.
+
+}
+
+
+
+
+function clearastringinp() {
+
+	document.getElementById("astringinp").value="";
+	document.getElementById("astringout").value="";
+	document.getElementById("mstringout").value="";
+
+}
+
+
+
+
+function changemorsetype(e) {
+
+	morsetype=e.target.value;
+	
+	domorse("convert");
+	
+	
+}
+
+
+
+
+function changerawspeed() {
+
+	var rawspeedinpDOM=document.getElementById("rawspeedinp");
+	var rawspeedinplabDOM=document.getElementById("rawspeedinplab");
+	
+	var rawspeed=rawspeedinpDOM.value
+	
+	rawspeedinplabDOM.innerHTML=rawspeed+" w.p.m.";
+	
+	dotms=1200/rawspeed;
+	
+
+}
+
+
+
+
+function changefreq() {
+
+	var freqinpDOM=document.getElementById("freqinp");
+	var freqinplabDOM=document.getElementById("freqinplab");
+	
+	freq=freqinpDOM.value
+	
+	freqinplabDOM.innerHTML=freq+"Hz";
+		
+
+}
+
+
+
+
+function changewordspace(e) {
+
+	wordspace=e.target.nextSibling.nodeValue;
+	
+	
+}
+
+
+
+
+function changespaceexpand() {
+
+	var spaceexpandinpDOM=document.getElementById("spaceexpandinp");
+	var spaceexpandinplabDOM=document.getElementById("spaceexpandinplab");
+	
+	spaceexpand=spaceexpandinpDOM.value;
+	
+	spaceexpandinplabDOM.innerHTML="x"+spaceexpand;
+		
+
+}
+
+</script>
+
+</head>
+
+<body>
+
+<center><img id="top" src="logo2.png" alt="logo" width="192" height="108""></center>
+
+<p class="rubrik">Enter plain text in the top box to have it converted to Morse code. Notes/instructions at bottom 
+of page.</p>
+
+<form autocomplete="off">
+	<fieldset style="background-color: #1b1717; border:#1b1717">
+	<p style="margin-top: 0px;">Text to convert to Morse (150 characters max.)</p>
+	<textarea id="astringinp" rows="4" maxlength="150" style="background-color: #eeebdd;"></textarea><br>
+    <div style="text-align: center;">
+	<button id="butplay" type="button" onclick="domorse('play')">play</button>
+	<button id="butdownload" type="button" onclick="domorse('download')">download</button>
+	<button type="button" onclick="domorse('convert')">convert only</button>
+	<button type="button" onclick="clearastringinp()">clear</button>
+    </div>
+
+	<p id="nosuppac">Browser doesn't support play.</p>
+
+	<p id="nosuppoac">Browser doesn't support download.</p>
+
+	</fieldset> <fieldset>
+    <p style="margin-top: 0px;">Text to be processed to Morse</p>
+	<textarea id="astringout" rows="4" readonly></textarea> </fieldset> <fieldset>
+    <p style="margin-top: 0px;">Converted text in Morse (for copying)</p>
+	<textarea id="mstringout" rows="9" readonly></textarea>
+
+	<p id="AMCnote">For Old American Morse: Δ 2-dot-length space, = 4-dot-length dash, ≡ 6-dot-length dash</p>
+
+	</fieldset> <fieldset onchange="changemorsetype(event)">
+    <p style="margin-top: 0px;">Morse type</p>
+	<label class="radio"><input type="radio" name="morsetype" value="ITU" checked>Modern ITU</label>
+	<label class="radio"><input type="radio" name="morsetype" value="AMC">Old American</label> </fieldset>
+	<fieldset>
+    <p style="margin-top: 0px;">Speed in WPM</p>
+	<label class="slider"><span class="sliderrange">4</span><input id="rawspeedinp" oninput="changerawspeed()" type="range" min="4" max="40" step="2" value="14"><span class="sliderrange">40</span><span id="rawspeedinplab" class="inplab">14 
+	w.p.m.</span></label> </fieldset> <fieldset>
+    <p style="margin-top: 0px;">Pitch in Hertz</p>
+	<label class="slider"><span class="sliderrange">300</span><input id="freqinp" oninput="changefreq()" type="range" min="300" max="1600" step="100" value="600"><span class="sliderrange">1600</span><span id="freqinplab" class="inplab">600Hz</span></label>
+	</fieldset> <fieldset onchange="changewordspace(event)">
+    <p style="margin-top: 0px;">Inter-word spacing (dot equivalents)</p>
+	<label class="radio"><input type="radio" name="wordspace">4</label> <label class="radio">
+	<input type="radio" name="wordspace">5</label> <label class="radio"><input type="radio" name="wordspace">6</label>
+	<label class="radio"><input type="radio" name="wordspace" checked>7</label> </fieldset> <fieldset>
+    <p style="margin-top: 0px;">Practice: Inter-letter/word expansion (times)</p>
+	<label class="slider"><span class="sliderrange">x1</span><input id="spaceexpandinp" oninput="changespaceexpand()" type="range" min="1" max="20" step="0.5" value="1"><span class="sliderrange">x20</span><span id="spaceexpandinplab" class="inplab">x1</span></label>	<!-- Remember to enlarge the zerostr if you extend the upper limit of this --></fieldset>
+</form>
+
+<p class="rubrikbot">Punctuation accepted: &amp;&#x2009;<b>.</b>&#x2009;<b>,</b>&#x2009;?&#x2009;!&#x2009;'&#x2009;/&#x2009;(&#x2009;)&#x2009;&#x2009;<b>:</b>&#x2009;<b>;</b>&#x2009;=&#x2009;+&#x2009;-&#x2009;_&#x2009;"&#x2009;$&#x2009;@<br>
+Special characters accepted: À&#x2009;Ä&#x2009;Å&#x2009;Ą&#x2009;Æ&#x2009;Ć&#x2009;Ĉ&#x2009;Ç&#x2009;Đ(D-stroke)&#x2009;Ð(Eth)&#x2009;É&#x2009;È&#x2009;Ę&#x2009;Ĝ&#x2009;Ĥ&#x2009;Ĵ&#x2009;Ł&#x2009;Ń&#x2009;Ñ&#x2009;Ó&#x2009;Ö&#x2009;Ø&#x2009;Ś&#x2009;Ŝ&#x2009;Š&#x2009;Þ&#x2009;Ü&#x2009;Ŭ&#x2009;Ź&#x2009;Ż 
+(the CH digraph can be made by prosign &lt;MM&gt;).<br>
+<br>
+Old American Morse – Punctuation accepted: &amp;&#x2009;<b>.</b>&#x2009;<b>,</b>&#x2009;?&#x2009;!&#x2009;<br>
+Old American Morse – Special characters accepted: none.<br>
+<br>
+Enter prosigns with angle brackets, e.g. &lt;CT&gt; for <span style="text-decoration: overline">CT</span>. Using E 
+(dot) and T (dash) inside a prosign, any other Morse character desired can be made up, e.g. &lt;EETT&gt; for <b>..-&#x200A;-</b></p>
+<footer>
+    <p>Webpage created by Eren ELMAS<br>
+    <a href="mailto:41.erenelmas@gmail.com">Contact me</a></p>
+</footer>
+
+
+<a id="fileout" style="display: none;" href="" download="morse.wav"></a>
+
+<script>
+
+defmorse();
+
+morsetype="ITU";
+dotms=86;
+freq=600;
+wordspace=7;
+spaceexpand=1;
+lastcontonoroff="none";
+
+doaudtest();
+
+</script>
+
+</body>
+
+</html>
