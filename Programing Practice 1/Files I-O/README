@@ -1,0 +1,15 @@
+Purpose of this task is creating a Java application that accepts student names, IDs, and grades. The student name and ID are all strings of no more than 10 characters.
+The grade is an integer between 0-100. Need to save this data to a file. Then read the names, IDs, grades of the students who received the highest grade.
+
+  import java.util.Scanner  > To get user input
+  import java.io.File  > To work with files
+  import java.io.FileWriter  > To write the file
+  import java.io.FileNotFoundException  >  To signal if the file couldn't open
+  import java.io.IOException  > To handle the errors
+
+The student names and grades can be only 10 character long. So if the lenght of the name is longer than 10 characters, programs asks user to enter the name again. As well as for 
+the student IDs.
+If the grades isn't between 0-100, programs gives and error message asks user to enter again.
+
+Used try/catch to write the file. You can use the writing method for creating a file and writing a file or writing a file that already exits. I created a file before.
+Used try/catch as well to read the file. Used a while loop to check if the file reached end. It is important to close the file end of the writing/reading proccess.
