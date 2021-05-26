@@ -1,0 +1,4 @@
+Purpose of this task is creating a menu-based Java application that displays the selected item. First item is a Pascal's Triangle and the second one is a reversed Pascal's Triangle.
+I imported a User Input (Scanner) class to have the choice of item.
+Wrote a method for regular  and reversed pascal's triangle. 
+
