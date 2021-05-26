@@ -1,0 +1,8 @@
+Purpose of this task is creating a program that prints multiplication table for all the numbers from 1 to 10.
+Used the tabulator character (\t) to align the values.
+
+Simply created two veriables
+Created a for loop for veriable 'a' that goes from 1 to 10.
+Created another for loop for veriable 'b' inside the first one that goes from 1 to 10 as well. 
+In this loop multiply the veriables we created and align them with '\t'.
+Lastly inside the first for loop wrote 'println' to go next line of the table.
