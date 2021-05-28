@@ -1,0 +1,14 @@
+The purpose of this task is writing a base convert class to convert Celcius, Kelvin and Fahrenheit using abstract classes.
+
+  An abstract class is a class that is declared abstract—it may or may not include abstract methods. Abstract classes cannot be instantiated, but they can be subclassed.
+  An abstract method is a method that is declared without an implementation (without braces, and followed by a semicolon), like this:
+    abstract void moveTo(double deltaX, double deltaY);
+
+Added java.util.Scanner library to allow user input.
+Created a abstract class named "celcius", inside this class created a abstract method named "convert".
+Created a class extends from "celcius" abstract class named "fahrenheit".
+Created a class extends from "celcius" abstract class named "kelvin".
+Programs asks user to input the celcius.
+Created a double veriable named "confah" to convert celcius to fahrenheit. The formula is multiply by 1.8 (or 9/5) and add 32.
+Created a double veriable named "conkel" to convert celcius to kelvin. The formula is celsius + 273.15.
+Printed the results.
