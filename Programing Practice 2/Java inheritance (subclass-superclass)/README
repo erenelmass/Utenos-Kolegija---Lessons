@@ -1,0 +1,13 @@
+The purpose of this task is to write a Java program to show that member of a super class can be accessed from derived classes.
+
+  In Java, it is possible to inherit attributes and methods from one class to another. 
+  We group the "inheritance concept" into two categories: subclass (child) - the class that inherits from another class. superclass (parent) - the class being inherited from.
+
+Created a base class named "Bicycle". This class has two fields as "gear" and "speed".
+The bicycle class has three methods. Such as; "applyBreak" to decrease the speed, "speedUp" to increase the speed and toString() method to print info of Bicycle.
+Derived class is "MountainBike" extends from Bicycle base class. The MountainBike subclass adds one more field as "seatHeight".
+The MountainBike subclass has one constructor that invoking base-class(Bicycle).
+The MountainBike subclass adds one more method as "setHeight".
+Overriding toString() method of Bicycle to print more info.
+Creating a new MountainBike as mb and entering the values.
+Printing the results.
