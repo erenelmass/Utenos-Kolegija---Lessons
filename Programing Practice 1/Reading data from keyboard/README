@@ -1,0 +1,21 @@
+This task is the very beginning of the Java to learn the data types, veriables, arithmetic operations, formatting and outputing the result.
+This program asks user to input data from keyboard.
+
+Created three veriables. 
+First one is a integer that stores whole numbers from -2,147,483,648 to 2,147,483,647.
+Secong one is a double that stores fractional numbers. Sufficient for storing 15 decimal digits.
+Third one is a float that stores fractional numbers. Sufficient for storing 6 to 7 decimal digits.
+
+Imported java.util.Scanner library to allow user input. Created a new scanner named "scan". Asking for the first entry and scanning the integer input. 
+Asking for the second entry and scanning the next double input. Asking for the third entry and scanning the next float input.
+
+Used this three veriables for four mathematical operations.
+Because of we are using integer and double/float veriables in operations, output of the results has lots of fraction. To prevent this we do formating for numeric output.
+To do the formating write "String.format("'converter'",'the operation')".
+There are different converters. Such as;
+  %d > for decimal integers
+  %f > for float
+  %n > a new line character appropriate to the platform running the application. you should always use %n, rather than \n
+  %tB > a date & time conversion—locale-specific full name of month
+  %td, %te > a date & time conversion—2-digit day of month. td has leading zeroes as needed, te does not
+  %tl > a date & time conversion—hour in 12-hour clock
