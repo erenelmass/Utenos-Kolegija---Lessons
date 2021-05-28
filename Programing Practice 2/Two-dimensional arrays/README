@@ -1,0 +1,13 @@
+The purpose of this task is to Write a program to multiply two matrices: A[.3,3] and B[3;3].Matrix elements are integers. 
+Initiate a matrix elements using a random method in the range 1 to 9. Output: A[3;3], B[3;3] and matrix multiplication result C[3][3].
+
+  Multidimensional Arrays can be defined in simple words as array of arrays. Data in multidimensional arrays are stored in tabular form (in row major order).
+  
+Adding java.Util.Scanner to allow user input.
+Creating a new scanner named sc.
+Asking user to enter the base of the square matrix.
+Creating three new two dimensional arrays as a,b,c.
+Asking user to enter the elements of the array a (User can enter elements as much as they stated, same for other array too).
+Asking user to enter the elements of the array b.
+Elemets of the array c are multiplies of array a and b.
+Outpringting the result of multiplied array.
