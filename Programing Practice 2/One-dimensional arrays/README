@@ -1,0 +1,9 @@
+The purpose of this task is asking user to input the array size and array values, finding the maximum element of the array and outputing the array and its maximum element.
+
+  Arrays are used to store multiple values in a single variable, instead of declaring separate variables for each value.
+
+Adding java.Util.Scanner to allow user input.
+Creating a class named "getMax" to find the maximum element of the array. 
+Asking user to input the size of the array and its elements.
+Outprinting the elements of the array.
+Outpringting the maximum element of the array.
