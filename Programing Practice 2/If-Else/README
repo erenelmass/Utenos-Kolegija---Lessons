@@ -1,0 +1,10 @@
+The purpose of this task is create an application with a command line interface for calculation functions value. Functions variables are introduced on the keyboard.
+  The function is: y = ax² + b, x<0 
+                       2x - 1, x≥0
+                   z = 2y
+Added java.util.Scanner to allow user input.
+Added the veriables a,x,b,y,z as integer because the inputs and the result always will be whole number.
+Asks the user for the a, x and b veriable's value. Scans the next byte because we want figures.
+If the value of x is lower than 0, processes y = a * (x * x) + b.
+If the value of x is bigger than 0 or equels to 0, processes y = (2 * x) - 1;.
+Then processes the z as (2 * y), then prints the result.
